@@ -1,0 +1,43 @@
+<div class="top-formulario row center-xs text-center">
+  <div class="col-xs-12 col-md-12">
+
+
+<div style="margin-left: 60%;margin-top: 5%;">
+<%= link_to 'Nuevo Producto', new_product_path %>  
+</div>
+<div id="body">
+    <div class="content">
+      <div>
+        <div>
+          <h1>Menu</h1>
+          <ul>
+          <% @products.each do |product| %>
+          <li>
+            <div> <%=image_tag product.cover.url(:menu)%></a> </div>
+            <h3><%=product.nombre%></h3>
+              <p>
+              <%= product.descripcion%>
+              </p>
+              <span class="price"><%=product.precio%>&cent;</span>
+              <% if current_user.try(:admin?)%>
+        <%= link_to 'Editar', edit_product_path(product) %>
+        <%= link_to 'Eliminar', product, method: :delete, data: { confirm: 'Are you sure?' } %>
+        <%end%>
+          </li>
+          <%end%>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="sidebar">
+      <h1>Menu</h1>
+      <ul class="navigation">
+       <% @categories.each do |category| %>
+        <li class="first">
+        <%= link_to category.nombre, ""%>
+        </li>
+        <%end%>
+      </ul>
+  </div>
+</div>
+</div>

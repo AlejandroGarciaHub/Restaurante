@@ -1,0 +1,45 @@
+
+ 
+<!DOCTYPE html>
+<!-- Website template by freewebsitetemplates.com -->
+<head>
+ <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+
+	<title>Restaurant</title>
+	<meta charset="utf-8">
+</head>
+	<body>
+	<div id="header">
+		<div>
+		<%if user_signed_in?%>
+		<h1>Bienvenido <% if current_user.try(:admin?)%> Cocinero <%else%> Mesero <%end%> </h1>
+		<%end%>
+			<ul class="navigation">
+				<li>
+				<%= link_to "Menu", products_path, class:"active"%>
+				</li>
+				<%if user_signed_in?%>
+					<% if current_user.try(:admin?)%>
+					<li>
+						<%= link_to "Ordenes/Pendientes", ""%>						
+					</li>
+					<%else%>
+						<li>
+						<%= link_to "Mi Orden", ""%>
+						</li>					
+					<%end%>
+
+
+				<li>
+					 <%= link_to "Cerrar sesion", destroy_user_session_path, method: :delete%>
+				</li>
+				<%end%>
+			</ul>
+		</div>
+	</div>
+
+	<%= yield %>
+	</body>
+</html>
