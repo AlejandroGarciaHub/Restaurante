@@ -67,6 +67,7 @@
 
       <%end%>
     
+  <%=f.hidden_field :pago, :value => total   %>
 <%if @purchase.new_record?%>
       <div class="col-md-10" style="margin-left: 2em;">
           <%= f.submit "Guardar",class:"waves-effect waves-light btn blue", style:"background-color:#1A8CB2; color:#fff" %>
@@ -106,7 +107,6 @@
 
     <% end %>
 
-  <%=f.hidden_field :pago, :value => total   %>
   <div class="col-md-10" style="text-align: right;">
     <p><b><%=@purchase_details.size%> productos agregados</b></p>
       <p><b>Total a pagar: <%= number_to_currency(total,:unit => '$')%></b></p>   
