@@ -85,7 +85,7 @@ class PurchasesController < ApplicationController
           end  
            session[:cart]={}
         @cart={}
-        format.html { redirect_to @purchase, notice: 'Purchase was successfully created.' }
+        format.html { redirect_to pendientes_path, notice: 'Purchase was successfully created.' }
         format.json { render :show, status: :created, location: @purchase }
       else
         format.html { render :new }
