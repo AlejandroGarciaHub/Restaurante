@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  fecha: 2016-11-15
+  pago: MyString
+  mesa: 1
+
+two:
+  fecha: 2016-11-15
+  pago: MyString
+  mesa: 1

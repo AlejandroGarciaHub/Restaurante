@@ -1,0 +1,57 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Purchase Details</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Cantidad</th>
+      <th>Tomate</th>
+      <th>Lechuga</th>
+      <th>Cebolla</th>
+      <th>Mostaza</th>
+      <th>Ketchup</th>
+      <th>Mayonesa</th>
+      <th>Pepinillos</th>
+      <th>Zanahoria</th>
+      <th>Col</th>
+      <th>Pepino</th>
+      <th>Aguacate</th>
+      <th>Limon</th>
+      <th>Pechuga</th>
+      <th>Queso</th>
+      <th>Aderezo</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @purchase_details.each do |purchase_detail| %>
+      <tr>
+        <td><%= purchase_detail.cantidad %></td>
+        <td><%= purchase_detail.tomate %></td>
+        <td><%= purchase_detail.lechuga %></td>
+        <td><%= purchase_detail.cebolla %></td>
+        <td><%= purchase_detail.mostaza %></td>
+        <td><%= purchase_detail.ketchup %></td>
+        <td><%= purchase_detail.mayonesa %></td>
+        <td><%= purchase_detail.pepinillos %></td>
+        <td><%= purchase_detail.zanahoria %></td>
+        <td><%= purchase_detail.col %></td>
+        <td><%= purchase_detail.pepino %></td>
+        <td><%= purchase_detail.aguacate %></td>
+        <td><%= purchase_detail.limon %></td>
+        <td><%= purchase_detail.pechuga %></td>
+        <td><%= purchase_detail.queso %></td>
+        <td><%= purchase_detail.aderezo %></td>
+        <td><%= link_to 'Show', purchase_detail %></td>
+        <td><%= link_to 'Edit', edit_purchase_detail_path(purchase_detail) %></td>
+        <td><%= link_to 'Destroy', purchase_detail, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Purchase detail', new_purchase_detail_path %>

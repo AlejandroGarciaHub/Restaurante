@@ -1,0 +1,13 @@
+<div class="center-xs text-center row">
+  <div class=" col-s12 col-md-6 col-md-offset-3">
+    <% if current_user.try(:admin?)%> 
+  <h1>Proceder a marcar como cocinada</h1>
+<%else%>
+  <h1>Marcar como recogida por mesero</h1>
+<%end%>
+<%= render 'form' %>
+
+<%= link_to 'Mostrar', @purchase %> |
+<%= link_to 'Volver', purchases_path %>
+</div>
+</div>

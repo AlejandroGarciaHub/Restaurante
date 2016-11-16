@@ -16,6 +16,7 @@
 		<%if user_signed_in?%>
 		<h1>Bienvenido <% if current_user.try(:admin?)%> Cocinero <%else%> Mesero <%end%> </h1>
 		<%end%>
+		
 			<ul class="navigation">
 				<li>
 				<%= link_to "Menu", products_path, class:"active"%>
@@ -23,12 +24,15 @@
 				<%if user_signed_in?%>
 					<% if current_user.try(:admin?)%>
 					<li>
-						<%= link_to "Ordenes/Pendientes", ""%>						
+						<%= link_to "Ordenes Pendientes", "/pendientes"%>						
 					</li>
 					<%else%>
-						<li>
-						<%= link_to "Mi Orden", ""%>
-						</li>					
+					<li>
+						<%= link_to "Ordenes Listas", "/pendientes"%>						
+					</li>
+					<li>
+						<%= link_to "Orden", "/cart"%>						
+					</li>				
 					<%end%>
 
 
@@ -39,6 +43,7 @@
 			</ul>
 		</div>
 	</div>
+
 
 	<%= yield %>
 	</body>

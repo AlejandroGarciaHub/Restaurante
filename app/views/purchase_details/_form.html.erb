@@ -1,0 +1,81 @@
+<%= form_for(@purchase_detail) do |f| %>
+  <% if @purchase_detail.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@purchase_detail.errors.count, "error") %> prohibited this purchase_detail from being saved:</h2>
+
+      <ul>
+      <% @purchase_detail.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :cantidad %><br>
+    <%= f.number_field :cantidad %>
+  </div>
+  <div class="field">
+    <%= f.label :tomate %><br>
+    <%= f.check_box :tomate %>
+  </div>
+  <div class="field">
+    <%= f.label :lechuga %><br>
+    <%= f.check_box :lechuga %>
+  </div>
+  <div class="field">
+    <%= f.label :cebolla %><br>
+    <%= f.check_box :cebolla %>
+  </div>
+  <div class="field">
+    <%= f.label :mostaza %><br>
+    <%= f.check_box :mostaza %>
+  </div>
+  <div class="field">
+    <%= f.label :ketchup %><br>
+    <%= f.check_box :ketchup %>
+  </div>
+  <div class="field">
+    <%= f.label :mayonesa %><br>
+    <%= f.check_box :mayonesa %>
+  </div>
+  <div class="field">
+    <%= f.label :pepinillos %><br>
+    <%= f.check_box :pepinillos %>
+  </div>
+  <div class="field">
+    <%= f.label :zanahoria %><br>
+    <%= f.check_box :zanahoria %>
+  </div>
+  <div class="field">
+    <%= f.label :col %><br>
+    <%= f.check_box :col %>
+  </div>
+  <div class="field">
+    <%= f.label :pepino %><br>
+    <%= f.check_box :pepino %>
+  </div>
+  <div class="field">
+    <%= f.label :aguacate %><br>
+    <%= f.check_box :aguacate %>
+  </div>
+  <div class="field">
+    <%= f.label :limon %><br>
+    <%= f.check_box :limon %>
+  </div>
+  <div class="field">
+    <%= f.label :pechuga %><br>
+    <%= f.check_box :pechuga %>
+  </div>
+  <div class="field">
+    <%= f.label :queso %><br>
+    <%= f.check_box :queso %>
+  </div>
+  <div class="field">
+    <%= f.label :aderezo %><br>
+    <%= f.check_box :aderezo %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

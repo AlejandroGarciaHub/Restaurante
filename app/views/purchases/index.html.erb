@@ -1,0 +1,29 @@
+<div class="top-formulario row center-xs text-center">
+  <div class="col-xs-12 col-md-6 col-md-offset-3">
+<h1>Todas las ordenes</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Mesa</th>
+      <th>Estatus</th>
+      <th colspan="1"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @purchases.each do |purchase| %>
+      <tr>
+        <th><%=purchase.mesa%></th>
+        <%if purchase.terminada==true&& purchase.lista==true%>
+        <td>Completada</td>       
+        <%else%>
+        <th>Pendiente de Cocinar/Entregar</th>          
+        <%end%>
+        <td><%= link_to 'Ver', purchase %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>
+</div>

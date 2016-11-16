@@ -1,0 +1,121 @@
+<div class="center-xs text-center row">
+  <div class=" col s12">
+<%= form_for(@purchase) do |f| %>
+    <%= f.label :fecha, hidden: true%><br>
+    <%= f.date_select :fecha, hidden: true %>
+
+    <%= f.label :pago, hidden: true %><br>
+    <%= f.text_field :pago, hidden: true %>
+<% if @purchase.new_record? %> 
+    <div class="field" style="margin-left: 15em; margin-right: 15em;">
+        <%= f.label :mesa, "Mesa" %> 
+        <br>     
+        <%=f.text_field :mesa %>      
+    </div>
+<%else%>
+    <div class="field" style="margin-left: 15em; margin-right: 15em;">
+        <%= f.label :mesa, "Mesa" %>
+        <br>     
+        <%=@purchase.mesa %>      
+    </div>
+<%end%>
+
+  <% if current_user.try(:admin?)%> 
+        <div class="field" style="margin-left: 15em; margin-right: 15em;">
+      
+         <%= f.check_box :terminada %>
+           <%= f.label :terminada, "Lista para entregarse" %>
+        </div>
+    <%else%>
+    <% unless @purchase.new_record? %> 
+    <div class="field" style="margin-left: 15em; margin-right: 15em;">
+      
+         <%= f.check_box :lista %>
+           <%= f.label :lista, "Recogida en cocina" %>
+    <%end%>
+    <%end%>
+
+    <% unless @purchase.new_record? %> 
+
+     <div class="col-md-10" style="margin-left: 2em;">
+          <%= f.submit "Guardar",class:"waves-effect waves-light btn blue", style:"background-color:#1A8CB2; color:#fff" %>
+    </div>  
+<%end%>  
+
+<br>
+
+<% total =0%>
+<% if @purchase.new_record? %> 
+<ul>
+  <% @cart.each do |id,quantity|%>
+    <% product=Product.find_by(id: id)%>
+
+      <div class="col-md-12 col-md-6 col-md-offset-3 cards-container" >
+                <div class="card small sticky-action" style="height: 300px;">
+                  <div class="card-image waves-effect waves-light">
+                    <%=image_tag "/mainimages/productos/#{product.id}.jpg", class:"activator", style:"margin:5%;"%>
+                  </div>
+                  <div class="card-content">
+                    <span class="card-title activator grey-text text-darken-4"><%=product.nombre%></span>
+              
+                    <p style="text-align: right;"><b>Cantidad:</b> <%=quantity%> - <b>Precio:</b> $ <%=product.precio%></p>                   
+                  </div>  
+
+                </div>
+      </div>
+    <% total+= quantity*product.precio%>
+
+      <%end%>
+    
+<%if @purchase.new_record?%>
+      <div class="col-md-10" style="margin-left: 2em;">
+          <%= f.submit "Guardar",class:"waves-effect waves-light btn blue", style:"background-color:#1A8CB2; color:#fff" %>
+      </div>  
+  <%end%>
+    <%else%>
+          <% total =0%>
+
+      <% cantidadLibros =0%>
+
+      <% (@purchase_details).each do |detail| %>
+
+            <br>
+
+        <ul>
+
+              <div class="col-md-12 cards-container" >
+                        <div class="card small sticky-action" style="height: 300px;">
+                          <div class="card-image waves-effect waves-light">
+                            <%=image_tag "/mainimages/productos/#{detail.product.id}.jpg", class:"activator", style:"margin:5%;"%>
+                          </div>
+                          <div class="card-content">
+                            <span class="card-title activator grey-text text-darken-4"><%=detail.product.nombre%></span>
+                      
+                            <p style="text-align: right;"><b>Cantidad:</b> <%=detail.cantidad%> - <b>Precio:</b> $ <%=detail.product.precio%></p>                    
+                          </div>  
+
+                        </div>
+              </div>
+              <%cantidadLibros+= detail.cantidad%>
+            <% total+= detail.cantidad*detail.product.precio%>
+
+   
+        
+          </ul>
+
+
+    <% end %>
+
+  <%=f.hidden_field :pago, :value => total   %>
+  <div class="col-md-10" style="text-align: right;">
+    <p><b><%=@purchase_details.size%> productos agregados</b></p>
+      <p><b>Total a pagar: <%= number_to_currency(total,:unit => '$')%></b></p>   
+  </div>
+    <%end%>
+</ul>
+
+
+<% end %>
+
+</div>
+</div>

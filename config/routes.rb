@@ -1,9 +1,18 @@
 Rails.application.routes.draw do
+  get 'cart/index'
+
+  resources :purchases do  
+    resources :purchase_details
+  end
   devise_for :users
   resources :products
   resources :categories
   get 'welcome/index'
-
+get '/pendientes' => 'purchases#pendientes'
+  get '/cart' => 'cart#index'
+  get '/cart/clear' => 'cart#clearCart'
+  get '/cart/:id' => 'cart#add'
+   get '/cart/remove/:id' => 'cart#remove'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

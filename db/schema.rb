@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161102041455) do
+ActiveRecord::Schema.define(version: 20161116035707) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "nombre"
@@ -29,6 +29,45 @@ ActiveRecord::Schema.define(version: 20161102041455) do
     t.string   "cover_content_type"
     t.integer  "cover_file_size"
     t.datetime "cover_updated_at"
+    t.integer  "category_id"
+  end
+
+  add_index "products", ["category_id"], name: "index_products_on_category_id"
+
+  create_table "purchase_details", force: :cascade do |t|
+    t.integer  "cantidad"
+    t.boolean  "tomate"
+    t.boolean  "lechuga"
+    t.boolean  "cebolla"
+    t.boolean  "mostaza"
+    t.boolean  "ketchup"
+    t.boolean  "mayonesa"
+    t.boolean  "pepinillos"
+    t.boolean  "zanahoria"
+    t.boolean  "col"
+    t.boolean  "pepino"
+    t.boolean  "aguacate"
+    t.boolean  "limon"
+    t.boolean  "pechuga"
+    t.boolean  "queso"
+    t.boolean  "aderezo"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "product_id"
+    t.integer  "purchase_id"
+  end
+
+  add_index "purchase_details", ["product_id"], name: "index_purchase_details_on_product_id"
+  add_index "purchase_details", ["purchase_id"], name: "index_purchase_details_on_purchase_id"
+
+  create_table "purchases", force: :cascade do |t|
+    t.date     "fecha"
+    t.string   "pago"
+    t.integer  "mesa"
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.boolean  "terminada",  default: false
+    t.boolean  "lista",      default: false
   end
 
   create_table "users", force: :cascade do |t|

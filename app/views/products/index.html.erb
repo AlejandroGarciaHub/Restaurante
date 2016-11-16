@@ -3,41 +3,48 @@
 
 
 <div style="margin-left: 60%;margin-top: 5%;">
-<%= link_to 'Nuevo Producto', new_product_path %>  
 </div>
 <div id="body">
+          <%= image_tag '/mainimages/menu.jpg'%>
     <div class="content">
       <div>
         <div>
           <h1>Menu</h1>
-          <ul>
+
+
+<%@categories.each do |category|%>
+  <div class="tabcontent" id="<%=category.nombre%>">
+  <h1 style=" border-bottom: 1px solid black; margin-top: "><%= category.nombre%></h1>
+        <ul>
           <% @products.each do |product| %>
-          <li>
-            <div> <%=image_tag product.cover.url(:menu)%></a> </div>
-            <h3><%=product.nombre%></h3>
-              <p>
-              <%= product.descripcion%>
-              </p>
-              <span class="price"><%=product.precio%>&cent;</span>
-              <% if current_user.try(:admin?)%>
-        <%= link_to 'Editar', edit_product_path(product) %>
-        <%= link_to 'Eliminar', product, method: :delete, data: { confirm: 'Are you sure?' } %>
-        <%end%>
-          </li>
-          <%end%>
-          </ul>
-        </div>
-      </div>
-    </div>
-    <div class="sidebar">
+                <%if category.nombre==product.category.nombre%>  
+                    <li>
+                      <div> <%=image_tag "/mainimages/productos/#{product.id}.jpg"%></a> </div>
+                      <p style="font-size: 35px; margin-top: 1em;"><%=product.nombre%></p>
+                        <p style="margin-top: 1em;">
+                        <%= product.descripcion%>
+                        </p>
+                        <span class="price"><%=product.precio%>&cent;</span>
+                         <% unless current_user.try(:admin?)%> 
+                            <p style="text-align: center; margin-top: 1.5em;"><a style="color: #1A8CB2;" href="/cart/<%=product.id%>">Agregar a la orden</a></p> 
+                       <%end%>
+                  </li>
+                <%end%>
+          <%end%>          
+       </ul>
+  </div>
+<%end%>
+</div>
+</div>
+</div>
+<div class="sidebar ">
       <h1>Menu</h1>
-      <ul class="navigation">
+      <ul class="navigation tab">
        <% @categories.each do |category| %>
-        <li class="first">
-        <%= link_to category.nombre, ""%>
+        <li role="presentation" class="first active">
+        <a href="javascript:void(0)" class="tablinks" onclick="openCity(event, '<%=category.nombre%>')"><%=category.nombre%></a>
         </li>
         <%end%>
       </ul>
   </div>
-</div>
 </div>

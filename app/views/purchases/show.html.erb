@@ -1,0 +1,60 @@
+<div class="center-xs text-center row">
+  <div class=" col-s6 col-md-6 col-md-offset-3">
+
+<p style="margin-top: 2em;">
+  <strong style="font-size: 30px;"">Pago:</strong>
+  <div style="font-size: 30px;"><%= @purchase.pago %></div>
+</p>
+<p style="margin-top: 2em;">
+  <strong style="font-size: 30px;"">Mesa:</strong>
+  <div style="font-size: 30px;"><%= @purchase.mesa %></div>
+</p>
+<p style="margin-top: 2em;">
+  <strong style="font-size: 30px;"">Estatus:</strong>
+  <%if @purchase.lista==false%>
+  <%if @purchase.terminada==true %>
+  <div style="font-size: 30px;">Lista para entregar</div>
+  	<%else%>
+  <div style="font-size: 30px;">Pendiente</div>
+  <%end%>
+<%else%>
+ <div style="font-size: 30px;">Completada</div>
+<%end%>
+<% total =0%>
+
+<% cantidadLibros =0%>
+
+<% (@purchase_details).each do |detail| %>
+
+<br>
+
+	<ul>
+
+	      <div class="col-md-12 cards-container" >
+	                <div class="card small sticky-action" style="height: 300px;">
+	                  <div class="card-image waves-effect waves-light">
+	                    <%=image_tag "/mainimages/productos/#{detail.product.id}.jpg", class:"activator", style:"margin:5%;"%>
+	                  </div>
+	                  <div class="card-content">
+	                    <span class="card-title activator grey-text text-darken-4"><%=detail.product.nombre%></span>
+	              
+	                    <p style="text-align: right;"><b>Cantidad:</b> <%=detail.cantidad%> - <b>Precio:</b> $ <%=detail.product.precio%></p>                    
+	                  </div>  
+
+	                </div>
+	      </div>
+	      <%cantidadLibros+= detail.cantidad%>
+	    <% total+= detail.cantidad*detail.product.precio%>
+
+	 
+	      
+	</ul>
+
+
+<% end %>
+<%unless @purchase.lista==true%>
+<%= link_to 'Editar', edit_purchase_path(@purchase) %> |
+<%= link_to 'Regresar', purchases_path %>
+<%end%>
+</div>
+</div>
