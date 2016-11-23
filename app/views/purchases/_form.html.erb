@@ -63,9 +63,16 @@
 
                 </div>
       </div>
+
+     
     <% total+= quantity*product.precio%>
 
       <%end%>
+
+       <div style="margin-left: 20%; margin-right: 20%;">
+      <p style="font-size: 2.5em; text-align: center;">Detalles Extra</p>
+        <%= f.text_area :detalles, style:"background-color: white; height: 100px;", placeholder:"¿Algun detalle referente a este producto en su orden?"%>
+      </div>
     
   <%=f.hidden_field :pago, :value => total   %>
 <%if @purchase.new_record?%>

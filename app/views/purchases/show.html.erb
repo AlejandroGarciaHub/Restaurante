@@ -52,6 +52,10 @@
 
 
 <% end %>
+ <div style="margin-left: 20%; margin-right: 20%;">
+      <p style="font-size: 2.5em; text-align: center;">Detalles de la orden</p>
+      <div style="background-color: white; height: 100px; white-space: pre-line;"><%=@purchase.detalles%></div>        
+      </div>
 <%unless @purchase.lista==true%>
 <%= link_to 'Editar', edit_purchase_path(@purchase) %> |
 <%= link_to 'Regresar', purchases_path %>
